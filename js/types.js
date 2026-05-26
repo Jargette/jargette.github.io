@@ -1,0 +1,19 @@
+/**
+ * @typedef {Object} Image
+ * @property {number} id
+ * @property {string} name
+ * @property {string} url
+ */
+
+/**
+ * @typedef {Image[]} Collection
+ */
+
+/**
+ * @typedef {Object} ImagesCollection
+ * @property {Collection} animals
+ * @property {Collection} fruits
+ * @property {Collection} cars
+ * @property {Collection} pokemon
+ * @property {Collection} foods
+ */

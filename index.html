@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Memory</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" type="module"></script>
+</head>
+<body>
+<header><h1>Jeu de Memory</h1></header>
+
+<div class="setup-form">
+    <h2>Démarrer une nouvelle partie</h2>
+
+    <form class="game-form">
+        <label for="pseudonyme">Saisissez votre pseudonyme : </label>
+        <input type="text" name="pseudonyme" id="pseudonyme">
+        <label for="mode-jeu">Choisissez un mode de jeu : </label>
+        <select name="mode-jeu" id="mode-jeu">
+            <option value="0">Chronomètre</option>
+            <option value="1">Temps imparti</option>
+        </select>
+        <label for="vies">Vies limitées : </label>
+        <select name="vies" id="vies">
+            <option value="0">Non</option>
+            <option value="1">Oui</option>
+        </select>
+        <label for="difficulte">Choisissez une difficulté : </label>
+        <select name="difficulte" id="difficulte">
+            <option value="0">Basique</option>
+            <option value="1">Facile</option>
+            <option value="2">Moyen</option>
+            <option value="3">Difficile</option>
+            <option value="4">Expert</option>
+        </select>
+        <label for="collection">Choisissez une collection d'images : </label>
+        <select name="collection" id="collection">
+            <option value="0">Animaux</option>
+            <option value="1">Fruits</option>
+            <option value="2">Voitures</option>
+            <option value="3">Pokemon</option>
+            <option value="4">Foods</option>
+        </select>
+        <button type="submit">Créer la partie</button>
+    </form>
+
+</div>
+
+<template id="carteAJouer">
+    <div class="card">
+        <div class="card-inner">
+            <div class="card-front">
+                <img src="./assets/images/mask1.jpg" alt="Hidden card">
+            </div>
+            <div class="card-back">
+                <img src="" alt="">
+            </div>
+        </div>
+    </div>
+</template>
+
+<div class="game-area hidden">
+    <div class="game-area-header"></div>
+    <div class="game-board"></div>
+</div>
+</body>
+</html>
