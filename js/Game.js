@@ -14,6 +14,7 @@ export class Game {
     cartes = [];
     nbPaires;
     vies;
+    mode;
     pairesTrouvees = 0;
     cartesRetournees = [];
     grilleBloquee = false;
@@ -22,7 +23,7 @@ export class Game {
     async endGame() {
         //On supprime ce qui est créé en début de partie
         clearInterval(this.timerInterval);
-        document.querySelectorAll('.game-timer').forEach(elt =>{
+        document.querySelectorAll('.game-timer').forEach(elt => {
             elt.remove() //Les deux timers, les coups et les vies sont de class game-timer
         })
         document.querySelector('#abandon').remove() //Bouton Abandonner
@@ -59,62 +60,20 @@ export class Game {
      */
     startGame(id, mode, vies) {
         this.#id = id;
-
         this.pairesTrouvees = 0;
         this.cartesRetournees = [];
         this.grilleBloquee = false;
         this.nbCoups = 0;
+        this.mode = mode
+        this.vies = undefined;
 
         const gameArea = document.querySelector('.game-area')
         gameArea.classList.remove('hidden');
-        // Choix du chronomètre ou temps limité
-        switch (mode) {
-            case 1:
-                this.startLimitedTimer();
-                break;
-            default:
-                this.startUnlimitedTimer();
-        }
+
         // Choix du nombre de vies limitées
-        switch (vies) {
-            case 1:
-                this.setLives();
-                break;
+        if (vies === 1) {
+            this.setLives();
         }
-        this.initCompteurCoups(); // Affiche le nombre de coups
-    }
-
-    /**
-     * Lance un temps limité pour finir le jeu
-     */
-    startLimitedTimer() {
-        let time = this.cartes.length*2; // Temps suffisant mais pas trop long
-        const timer = document.createElement('div');
-        timer.classList.add('game-timer');
-        timer.innerHTML = `Temps restant : ${time}s`;
-        document.querySelector('.game-area-header').append(timer);
-        this.timerInterval = setInterval(() => {
-            time -= 1;
-            timer.innerHTML = `Temps restant : ${time}s`;
-            if (time === 0) {
-                this.endGame();
-            }
-        }, 1000);
-    }
-
-    /**
-     * Lance un chronomètre
-     */
-    startUnlimitedTimer() {
-        let time = 0;
-        const timer = document.createElement('div');
-        timer.classList.add('game-timer');
-        timer.innerHTML = `Temps écoulé : ${time}s`;
-        document.querySelector('.game-area-header').append(timer);
-        this.timerInterval = setInterval(() => {
-            time += 1;
-            timer.innerHTML = `Temps écoulé : ${time}s`;
-        }, 1000);
     }
 
     /**
@@ -122,25 +81,9 @@ export class Game {
      */
     setLives() {
         this.vies = this.nbPaires;
-        const lives = document.createElement('div')
-        lives.id = "affichage-vies";
-        lives.classList.add('game-timer');
-        lives.innerHTML = `Vies restantes : ${this.vies}`;
-        document.querySelector('.game-area-header').append(lives);
         if (this.vies === 0) {
             this.endGame();
         }
-    }
-
-    /**
-     * Affiche le compteur de coups en haut
-     */
-    initCompteurCoups() {
-        const coupsDiv = document.createElement('div');
-        coupsDiv.id = 'affichage-coups';
-        coupsDiv.classList.add('game-timer');
-        coupsDiv.innerHTML = `Coups : ${this.nbCoups}`;
-        document.querySelector('.game-area-header').append(coupsDiv);
     }
 
     /**
