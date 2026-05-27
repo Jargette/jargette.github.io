@@ -88,10 +88,10 @@ export class Game {
      * Lance un temps limité pour finir le jeu
      */
     startLimitedTimer() {
-        let time = 60;
+        let time = this.cartes.length*2; // Temps suffisant mais pas trop long
         const timer = document.createElement('div');
         timer.classList.add('game-timer');
-        timer.innerHTML = `Temps restant : ${time} s`;
+        timer.innerHTML = `Temps restant : ${time}s`;
         document.querySelector('.game-area-header').append(timer);
         this.timerInterval = setInterval(() => {
             time -= 1;
@@ -109,7 +109,7 @@ export class Game {
         let time = 0;
         const timer = document.createElement('div');
         timer.classList.add('game-timer');
-        timer.innerHTML = `Temps écoulé : ${time} s`;
+        timer.innerHTML = `Temps écoulé : ${time}s`;
         document.querySelector('.game-area-header').append(timer);
         this.timerInterval = setInterval(() => {
             time += 1;
@@ -121,7 +121,7 @@ export class Game {
      * Initialise les vies du joueur
      */
     setLives() {
-        this.vies = 5;
+        this.vies = this.nbPaires;
         const lives = document.createElement('div')
         lives.id = "affichage-vies";
         lives.classList.add('game-timer');
