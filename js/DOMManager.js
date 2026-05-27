@@ -27,17 +27,12 @@ export class DOMManager {
                 .setAttribute('alt', image.name);
          
             gameBoard.append(newDiv);
-            
             i++;
         }
-
     }
-
 
     /**
      * Montre l'autre face de carte
-     * 
-     * 
      */
     returnCard(event){
        const carte=event.target.closest('.card')
@@ -69,7 +64,5 @@ export class DOMManager {
          <img src="${image.url}" alt="${image.name}">
          </div>
          </div>
-         */
-
-    
+         */    
 }
