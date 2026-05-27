@@ -17,14 +17,17 @@ document.querySelector('.game-form').addEventListener('submit', async function (
     const collection = parseInt(formData.get('collection'));
 
     try {
-        const data = await ApiService.createGame(pseudo, difficulte+1);
+        const data = await ApiService.createGame(pseudo, difficulte + 1);
         console.log('Success:', data, data.id);
 
         document.querySelector('.setup-form').classList.add('hidden');
         game.generateCards(collection, difficulte); // Doit être avant startGame car startGame() utilise le nombre de
         game.startGame(data.id, mode, vies);        // cartes pour définir la limite de temps et le nombre de vies
         domManager.createCards(game.cartes);
-        domManager.boutonAbandon(game)
+        domManager.starTimer(game);
+        domManager.voirVieRestante(game);
+        domManager.initCompteurCoups(game);
+        domManager.boutonAbandon(game);
 
     } catch (error) {
         console.error('Error:', error);
